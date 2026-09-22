@@ -1,0 +1,17 @@
+py -m PyInstaller --noconfirm --onefile --windowed --name "Asta_Academie" ^
+--icon "Space_logo.ico" ^
+--add-data "C:/Users/DELL/AppData/Local/Programs/Python/Python313/Lib/site-packages/customtkinter;customtkinter/" ^
+--add-data "security_auth.py;." ^
+--add-data "logic_tools.py;." ^
+--add-data "shortcuts_data.py;." ^
+--add-data "oracle_hub.py;." ^
+--add-data "space_code.py;." ^
+--add-data "cours_data.py;." ^
+--add-data "updates_asta.py;." ^
+--add-data "Space_logo.ico;." ^
+--add-data "Space_logo_256.png;." ^
+"main.py"
+
+REM NOTE: Remplacez le chemin customtkinter par votre chemin Python.
+REM Pour trouver le chemin : pip show customtkinter
+REM Exemple: C:/Users/VOTRE_NOM/AppData/Local/Programs/Python/Python313/...

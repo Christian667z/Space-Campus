@@ -1,0 +1,2 @@
+Place small PNG icons here named e.g. home.png, assistant.png, insight.png, tools.png, library.png, flash.png, shield.png, brain.png, notes.png, stats.png, guide.png, user.png, target.png, info.png, settings.png
+These icons will be used by the UI when available; otherwise the textual fallback will be shown.

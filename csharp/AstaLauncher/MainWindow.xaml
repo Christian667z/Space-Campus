@@ -1,0 +1,62 @@
+<Window x:Class="AstaLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Asta Académie - Panneau d'Administration PRO" Height="700" Width="1100"
+        Background="#0a0000" Foreground="White" WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <!-- Style du menu de navigation gauche -->
+        <Style x:Key="SidebarBtnStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="20,15"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#220000"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#330000"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#110000"/>
+                                <Setter Property="Foreground" Value="#ff2222"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar (Zone Gauche) -->
+        <Border Grid.Column="0" Background="#130000" BorderBrush="#ff2222" BorderThickness="0,0,1,0">
+            <StackPanel>
+                <TextBlock Text="☠️ ASTA ADMIN" FontSize="22" FontWeight="Bold" Foreground="#ff2222" Margin="20,30,20,5"/>
+                <TextBlock Text="SaaS Hypervisor (C# WPF)" FontSize="12" Foreground="#aa3333" Margin="20,0,20,40"/>
+
+                <Button Content="📊 Dashboard Live" Style="{StaticResource SidebarBtnStyle}" Click="NavDashboard_Click"/>
+                <Button Content="👥 Utilisateurs" Style="{StaticResource SidebarBtnStyle}" Click="NavUsers_Click"/>
+                <Button Content="📋 Analyse des Logs" Style="{StaticResource SidebarBtnStyle}" Click="NavLogs_Click"/>
+                <Button Content="🛡️ Système &amp; Sécurité" Style="{StaticResource SidebarBtnStyle}" Click="NavSys_Click"/>
+                <Button Content="🔑 Générateur Clés" Style="{StaticResource SidebarBtnStyle}" Click="NavGen_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Contenu Dynamique (Zone Droite) -->
+        <ContentControl x:Name="MainContent" Grid.Column="1" Margin="30"/>
+    </Grid>
+</Window>

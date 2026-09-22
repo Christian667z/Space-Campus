@@ -1,0 +1,6 @@
+{
+  "name": "Asta Académie",
+  "description": "Plateforme académique UNASMOH - Tableau de bord, cours, Space AI, sécurité native Rust/C++ et architecture de bureau moderne",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

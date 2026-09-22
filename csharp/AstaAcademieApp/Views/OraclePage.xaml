@@ -1,0 +1,131 @@
+<Page x:Class="AstaAcademieApp.Views.OraclePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="L'Oracle">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="30">
+        <StackPanel>
+
+            <!-- Header -->
+            <TextBlock Text="🔮 L'Oracle — Savoir Infini" FontSize="26" FontWeight="Black"
+                       Foreground="{StaticResource BrushPrimary}" Margin="0,0,0,4"/>
+            <TextBlock Text="Faits, citations et chronologie de l'informatique — données live depuis Python"
+                       FontSize="13" Foreground="{StaticResource BrushTextMuted}" Margin="0,0,0,20"/>
+
+            <!-- Status bridge -->
+            <Border x:Name="BridgeStatus" CornerRadius="6" Padding="12,8" Margin="0,0,0,20"
+                    Background="#0D1B0D">
+                <TextBlock x:Name="TxtBridgeStatus" Text="⏳ Connexion au backend Python…"
+                           Foreground="#f59e0b" FontFamily="Consolas" FontSize="12"/>
+            </Border>
+
+            <!-- Astuce du jour -->
+            <Border Style="{StaticResource GlassCardStyle}" Background="{StaticResource BrushBgCard}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="💡 ASTUCE DU JOUR" FontSize="11" FontWeight="Bold"
+                               Foreground="{StaticResource BrushTextMuted}" Margin="0,0,0,8"/>
+                    <TextBlock x:Name="TxtTip" TextWrapping="Wrap" FontSize="14"
+                               Foreground="{StaticResource BrushAccent}" LineHeight="22"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Fait + Citation en 2 colonnes -->
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Fait du moment -->
+                <Border Grid.Column="0" Style="{StaticResource GlassCardStyle}"
+                        Background="{StaticResource BrushBgCard}" Margin="0,0,10,0">
+                    <StackPanel>
+                        <TextBlock Text="⚡ FAIT DU MOMENT" FontSize="11" FontWeight="Bold"
+                                   Foreground="{StaticResource BrushTextMuted}" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="TxtFact" TextWrapping="Wrap" FontSize="13"
+                                   Foreground="{StaticResource BrushTextWhite}" LineHeight="20" Margin="0,0,0,12"/>
+                        <Button x:Name="BtnNewFact" Content="🔄 Nouveau Fait"
+                                Style="{StaticResource NavButtonStyle}"
+                                Foreground="{StaticResource BrushAccent}"
+                                Click="BtnNewFact_Click"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Citation -->
+                <Border Grid.Column="1" Style="{StaticResource GlassCardStyle}"
+                        Background="{StaticResource BrushBgCard}" Margin="10,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="❝ CITATION" FontSize="11" FontWeight="Bold"
+                                   Foreground="{StaticResource BrushTextMuted}" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="TxtQuote" TextWrapping="Wrap" FontSize="13"
+                                   Foreground="{StaticResource BrushTextWhite}" FontStyle="Italic"
+                                   LineHeight="20" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TxtQuoteAuthor" FontSize="11"
+                                   Foreground="{StaticResource BrushPrimary}"
+                                   HorizontalAlignment="Right" Margin="0,0,0,12"/>
+                        <Button Content="🔄 Nouvelle Citation"
+                                Style="{StaticResource NavButtonStyle}"
+                                Foreground="{StaticResource BrushPrimary}"
+                                Click="BtnNewQuote_Click"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Chronologie -->
+            <TextBlock Text="🕰️ Chronologie des Géants de l'Informatique"
+                       FontSize="18" FontWeight="Bold"
+                       Foreground="{StaticResource BrushAccent}" Margin="0,10,0,12"/>
+            <ItemsControl x:Name="TimelineList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{StaticResource BrushBgCard}"
+                                BorderBrush="{StaticResource BrushBorder}" BorderThickness="1"
+                                CornerRadius="6" Margin="0,0,0,6" Padding="16,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding annee}" FontSize="15"
+                                           FontWeight="Bold" Foreground="{StaticResource BrushAccent}"
+                                           FontFamily="Consolas" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="1" Text="{Binding pays}" FontSize="18"
+                                           VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" VerticalAlignment="Center"
+                                           FontSize="12" Foreground="{StaticResource BrushTextWhite}"
+                                           TextWrapping="Wrap">
+                                    <Run FontWeight="Bold" Text="{Binding personne}"/>
+                                    <Run Text=" — "/>
+                                    <Run Text="{Binding contribution}"/>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Haïti Tech -->
+            <TextBlock Text="🇭🇹 Haïti &amp; l'Informatique"
+                       FontSize="18" FontWeight="Bold"
+                       Foreground="{StaticResource BrushPrimary}" Margin="0,20,0,12"/>
+            <ItemsControl x:Name="HaitiList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{StaticResource BrushBgCard}"
+                                BorderBrush="{StaticResource BrushBorder}" BorderThickness="1"
+                                CornerRadius="8" Margin="0,0,0,10" Padding="20,14">
+                            <StackPanel>
+                                <TextBlock Text="{Binding titre}" FontSize="14" FontWeight="Bold"
+                                           Foreground="{StaticResource BrushPrimary}" Margin="0,0,0,6"/>
+                                <TextBlock Text="{Binding contenu}" FontSize="12"
+                                           Foreground="{StaticResource BrushTextWhite}"
+                                           TextWrapping="Wrap" LineHeight="20"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

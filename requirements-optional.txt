@@ -1,0 +1,2 @@
+# Space AI — Gemini (nécessite Internet ; optionnel si mode Local uniquement)
+google-genai>=1.0.0

@@ -1,0 +1,5 @@
+.auth-panel{padding:18px;background:linear-gradient(180deg,#080f1d,#0f172a);border-radius:8px;color:#f1f5f9}
+.auth-form{display:flex;flex-direction:column;gap:12px;max-width:420px}
+.auth-form input{padding:12px;border-radius:6px;border:1px solid #334155;background:#1e293b;color:#f1f5f9}
+.auth-form button{padding:10px;border-radius:8px;border:none;background:#10b981;color:#08101a;font-weight:700}
+.auth-form button.active{box-shadow:0 6px 16px rgba(16,185,129,0.12);background:#059669}

@@ -1,0 +1,9 @@
+Checklist de validation rapide
+
+- [ ] Lancer python server.py et vérifier qu'il écoute 127.0.0.1:5000
+- [ ] Lancer frontend build (npm run build) puis exécuter l'exe WPF qui doit démarrer server.py en arrière-plan
+- [ ] Vérifier le Dashboard (frontend) : nombre d'utilisateurs/documents s'actualise
+- [ ] Tester /api/space-ai/chat via POST JSON {"question":"..."}
+- [ ] Tester /api/admin/clean avec header X-ADMIN-KEY: local-admin-key
+- [ ] Exécuter pyflakes et vérifier qu'il n'y a pas d'erreurs critiques
+- [ ] Si obfuscation souhaitée, exécuter scripts/obfuscate_backend.ps1 et vérifier dist_obf

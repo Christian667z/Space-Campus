@@ -1,0 +1,113 @@
+<Page x:Class="AstaAcademieApp.Views.NotesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Mes Notes">
+    <Grid Margin="30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Colonne gauche : liste des notes -->
+        <Grid Grid.Column="0" Margin="0,0,16,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="📝 Mes Notes" FontSize="20" FontWeight="Black"
+                       Foreground="{StaticResource BrushPrimary}" Margin="0,0,0,12"/>
+
+            <Button Grid.Row="1" Content="+ Nouvelle Note" Click="BtnNew_Click"
+                    Style="{StaticResource NavButtonStyle}"
+                    Foreground="{StaticResource BrushPrimary}"
+                    FontWeight="Bold" Margin="0,0,0,12" Padding="10,8"/>
+
+            <ListBox Grid.Row="2" x:Name="NotesList"
+                     Background="Transparent" BorderThickness="0"
+                     SelectionChanged="NotesList_SelectionChanged">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0,0,0,4"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{StaticResource BrushBgCard}"
+                                BorderBrush="{StaticResource BrushBorder}" BorderThickness="1"
+                                CornerRadius="6" Padding="12,10">
+                            <StackPanel>
+                                <TextBlock Text="{Binding titre}" FontSize="13" FontWeight="Bold"
+                                           Foreground="{StaticResource BrushTextWhite}" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="{Binding categorie}" FontSize="10"
+                                           Foreground="{StaticResource BrushAccent}" Margin="0,2,0,0"/>
+                                <TextBlock Text="{Binding date}" FontSize="9"
+                                           Foreground="{StaticResource BrushTextMuted}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <!-- Colonne droite : éditeur -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Titre -->
+            <TextBox Grid.Row="0" x:Name="TxtTitre"
+                     FontSize="18" FontWeight="Bold"
+                     Background="Transparent" Foreground="{StaticResource BrushTextWhite}"
+                     BorderBrush="{StaticResource BrushBorder}" BorderThickness="0,0,0,1"
+                     Padding="4,6" Margin="0,0,0,10"/>
+
+            <!-- Catégorie -->
+            <ComboBox Grid.Row="1" x:Name="CbCategorie" Width="180"
+                      HorizontalAlignment="Left" Margin="0,0,0,10"
+                      Background="{StaticResource BrushBgCard}"
+                      Foreground="{StaticResource BrushTextWhite}">
+                <ComboBoxItem Content="Général" IsSelected="True"/>
+                <ComboBoxItem Content="Cours"/>
+                <ComboBoxItem Content="Examen"/>
+                <ComboBoxItem Content="Projet"/>
+                <ComboBoxItem Content="Personnel"/>
+            </ComboBox>
+
+            <!-- Corps -->
+            <TextBox Grid.Row="2" x:Name="TxtContenu"
+                     AcceptsReturn="True" TextWrapping="Wrap"
+                     FontSize="13" FontFamily="Segoe UI"
+                     Background="{StaticResource BrushBgCard}"
+                     Foreground="{StaticResource BrushTextWhite}"
+                     BorderBrush="{StaticResource BrushBorder}" BorderThickness="1"
+                     Padding="14" VerticalScrollBarVisibility="Auto"/>
+
+            <!-- Boutons -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,12,0,0">
+                <Button Content="💾 Sauvegarder" Click="BtnSave_Click"
+                        Style="{StaticResource NavButtonStyle}"
+                        Foreground="{StaticResource BrushPrimary}"
+                        FontWeight="Bold" Padding="16,8" Margin="0,0,10,0"/>
+                <Button Content="🗑️ Supprimer" Click="BtnDelete_Click"
+                        Style="{StaticResource NavButtonStyle}"
+                        Foreground="#ef4444" Padding="16,8"/>
+                <TextBlock x:Name="TxtSaveStatus" Text="" FontSize="11"
+                           Foreground="#10b981" VerticalAlignment="Center" Margin="16,0,0,0"
+                           FontFamily="Consolas"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

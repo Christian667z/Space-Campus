@@ -1,0 +1,6 @@
+<!-- Snippet to add to your .csproj to embed frontend/dist assets as resources -->
+<ItemGroup>
+  <EmbeddedResource Include="frontend\dist\**\*" />
+</ItemGroup>
+
+<!-- At runtime, extract with Assembly.GetManifestResourceStream("YourAssembly.frontend.dist.index.html") -->

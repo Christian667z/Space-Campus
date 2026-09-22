@@ -1,0 +1,4 @@
+# Commandes vocales Space AI (onglet integre)
+SpeechRecognition>=3.10.0
+pyttsx3>=2.90
+edge-tts>=6.0.0

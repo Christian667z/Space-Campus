@@ -1,0 +1,4 @@
+# Ancienne interface CustomTkinter (main.py) — optionnel
+customtkinter>=5.2.2
+matplotlib>=3.7.0
+pyqtgraph

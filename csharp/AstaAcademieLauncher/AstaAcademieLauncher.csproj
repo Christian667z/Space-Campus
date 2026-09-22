@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>AstaAcademieLauncher</AssemblyName>
+    <!-- Optimisations pour la distribution autonome -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+  </PropertyGroup>
+
+  <!-- Dépendances pour le chargement des configurations et diagnostic -->
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <!-- Embed frontend/dist as resources and ensure native.dll is copied to output -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\frontend\dist\**\*" />
+    <None Include="..\..\native\build\Release\native.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="CopyFrontendToOutput" AfterTargets="Build">
+    <ItemGroup>
+      <_FrontendFiles Include="@(EmbeddedResource)" />
+    </ItemGroup>
+    <MakeDir Directories="$(OutputPath)wwwroot" />
+    <Copy SourceFiles="%(_FrontendFiles.Identity)" DestinationFolder="$(OutputPath)wwwroot\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

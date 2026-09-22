@@ -1,0 +1,61 @@
+# Environnements virtuels Python
+.venv/
+env/
+venv/
+ENV/
+
+# Bytecode et caches Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Binaires et exécutables compilés
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdb
+
+# Visual Studio & VS Code caches
+.vs/
+.vscode/
+*.suo
+*.user
+*.userprefs
+*.db-journal
+*.opendb
+
+# Builds .NET / C#
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Builds et sorties de distribution (PyInstaller, Go, etc.)
+build/
+dist/
+dist/*
+
+# Dépendances Node.js
+node_modules/
+**/node_modules/
+
+# Sauvegardes et logs temporaires
+*.log
+pyflakes*.txt
+pyinstaller_log.txt
+out*.txt
+error_test.txt
+data/backups/
+backups/
+
+# Configuration sensible (clés, tokens)
+.env
+backend/.env
+registre_licences.json
+
+# Fichiers temporaires OS
+Thumbs.db
+Desktop.ini
+.DS_Store

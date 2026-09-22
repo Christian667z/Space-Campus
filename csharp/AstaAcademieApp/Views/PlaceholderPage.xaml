@@ -1,0 +1,11 @@
+<Page x:Class="AstaAcademieApp.Views.PlaceholderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="PlaceholderPage">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock x:Name="TxtTitle" Text="⚙️ Module en construction..." FontSize="24" FontWeight="Bold" Foreground="{StaticResource BrushTextWhite}" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="Cette section est en cours de développement." FontSize="14" Foreground="{StaticResource BrushTextMuted}" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Page>

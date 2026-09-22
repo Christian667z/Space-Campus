@@ -1,0 +1,22 @@
+Instructions de build et exécution (Windows)
+
+1) Backend Flask local
+- Assurez-vous d'avoir Python 3.8+ et pip install flask werkzeug
+- Lancer : python server.py
+
+2) Frontend
+- Aller dans frontend
+- npm ci
+- npm run build
+
+3) Lancement depuis le launcher C# (MainWindow) :
+- Construisez le projet WPF et placez server.py dans le même dossier que l'exécutable ou ajustez le chemin dans MainWindow.xaml.cs
+
+4) Obfuscation backend (optionnel)
+- Exécuter scripts\obfuscate_backend.ps1
+
+5) Durcissement .NET (optionnel)
+- Construire en Release, puis exécuter scripts\obfuscate_dotnet.ps1
+
+6) Embedding assets
+- Après build frontend, ajoutez le snippet de docs/csproj-embed-snippet.txt dans votre .csproj et reconstruisez.

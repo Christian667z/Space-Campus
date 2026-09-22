@@ -1,0 +1,5 @@
+﻿# Meta-fichier : installateur utilise requirements-core / optional / legacy
+-r requirements-core.txt
+-r requirements-optional.txt
+-r requirements-voice.txt
+-r requirements-legacy.txt

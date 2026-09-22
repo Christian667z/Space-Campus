@@ -1,0 +1,239 @@
+<Page x:Class="AstaAcademieApp.Views.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Dashboard">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="30">
+        <StackPanel>
+
+            <!-- ══ Hero Banner ══════════════════════════════════════════════ -->
+            <Border CornerRadius="12" Height="140" Margin="0,0,0,25"
+                    BorderBrush="{StaticResource BrushBorder}" BorderThickness="1">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#0e1e3a" Offset="0"/>
+                        <GradientStop Color="#132548" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid Margin="30">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock x:Name="TxtWelcome" Text="👋 Bienvenue, Étudiant !"
+                                   FontSize="26" FontWeight="Black"
+                                   Foreground="{StaticResource BrushTextWhite}"/>
+                        <TextBlock Text="Prêt à apprendre aujourd'hui ?"
+                                   FontSize="13" Foreground="{StaticResource BrushTextMuted}" Margin="0,4,0,0"/>
+                        <!-- Heure en direct -->
+                        <TextBlock x:Name="TxtDate" Text=""
+                                   FontSize="11" Foreground="{StaticResource BrushTextMuted}"
+                                   FontFamily="Consolas" Margin="0,6,0,0"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBlock Text="Niveau" FontSize="11"
+                                   Foreground="{StaticResource BrushTextMuted}"
+                                   HorizontalAlignment="Right"/>
+                        <TextBlock x:Name="TxtNiveau" Text="L2" FontSize="40" FontWeight="Black"
+                                   Foreground="{StaticResource BrushAccent}"
+                                   HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ══ Stat Cards ═══════════════════════════════════════════════ -->
+            <UniformGrid Columns="4" Rows="1" Margin="0,0,0,25">
+                <Border Style="{StaticResource GlassCardStyle}" Margin="0,0,12,0"
+                        Background="{StaticResource BrushBgCard}">
+                    <StackPanel>
+                        <TextBlock Text="⭐" FontSize="26"/>
+                        <TextBlock Text="XP TOTAL" FontSize="10" FontWeight="Bold"
+                                   Foreground="{StaticResource BrushTextMuted}" Margin="0,12,0,4"/>
+                        <TextBlock x:Name="TxtCardXP" Text="120 XP" FontSize="22"
+                                   FontWeight="Black" Foreground="{StaticResource BrushPrimary}"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource GlassCardStyle}" Margin="0,0,12,0"
+                        Background="{StaticResource BrushBgCard}">
+                    <StackPanel>
+                        <TextBlock Text="🔥" FontSize="26"/>
+                        <TextBlock Text="SÉRIE ACTIVE" FontSize="10" FontWeight="Bold"
+                                   Foreground="{StaticResource BrushTextMuted}" Margin="0,12,0,4"/>
+                        <TextBlock x:Name="TxtCardStreak" Text="3 Jours" FontSize="22"
+                                   FontWeight="Black" Foreground="#f59e0b"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource GlassCardStyle}" Margin="0,0,12,0"
+                        Background="{StaticResource BrushBgCard}">
+                    <StackPanel>
+                        <TextBlock Text="🏅" FontSize="26"/>
+                        <TextBlock Text="BADGES" FontSize="10" FontWeight="Bold"
+                                   Foreground="{StaticResource BrushTextMuted}" Margin="0,12,0,4"/>
+                        <TextBlock x:Name="TxtCardBadges" Text="1 Badge" FontSize="22"
+                                   FontWeight="Black" Foreground="{StaticResource BrushAccent}"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource GlassCardStyle}" Background="{StaticResource BrushBgCard}">
+                    <StackPanel>
+                        <TextBlock Text="🎯" FontSize="26"/>
+                        <TextBlock Text="MISSIONS" FontSize="10" FontWeight="Bold"
+                                   Foreground="{StaticResource BrushTextMuted}" Margin="0,12,0,4"/>
+                        <TextBlock x:Name="TxtCardMissions" Text="0 Complètes" FontSize="22"
+                                   FontWeight="Black" Foreground="#a78bfa"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!-- ══ Graphique XP + Oracle ══════════════════════════════════ -->
+            <Grid Margin="0,0,0,25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Graphique XP dynamique -->
+                <Border Grid.Column="0" Style="{StaticResource GlassCardStyle}"
+                        Background="{StaticResource BrushBgCard}" Margin="0,0,20,0" Height="230">
+                    <Grid>
+                        <TextBlock Text="📈 PROGRESSION HEBDOMADAIRE" FontSize="12"
+                                   FontWeight="Bold" Foreground="{StaticResource BrushTextMuted}"
+                                   VerticalAlignment="Top"/>
+                        <Grid Margin="0,35,0,0" VerticalAlignment="Bottom">
+                            <Border BorderBrush="{StaticResource BrushBorder}"
+                                    BorderThickness="0,0,0,1" VerticalAlignment="Bottom" Margin="0,0,0,20"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom" Margin="0,0,0,20">
+                                <!-- Barres nommées pour mise à jour dynamique -->
+                                <StackPanel Margin="8,0" HorizontalAlignment="Center">
+                                    <Border x:Name="BarLun" Width="28" Height="40" CornerRadius="4"
+                                            Background="{StaticResource BrushAccent}" Opacity="0.8"
+                                            VerticalAlignment="Bottom"/>
+                                    <TextBlock Text="L" FontSize="9" Foreground="{StaticResource BrushTextMuted}"
+                                               HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <StackPanel Margin="8,0" HorizontalAlignment="Center">
+                                    <Border x:Name="BarMar" Width="28" Height="70" CornerRadius="4"
+                                            Background="{StaticResource BrushAccent}" Opacity="0.8"
+                                            VerticalAlignment="Bottom"/>
+                                    <TextBlock Text="M" FontSize="9" Foreground="{StaticResource BrushTextMuted}"
+                                               HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <StackPanel Margin="8,0" HorizontalAlignment="Center">
+                                    <Border x:Name="BarMer" Width="28" Height="50" CornerRadius="4"
+                                            Background="{StaticResource BrushAccent}" Opacity="0.8"
+                                            VerticalAlignment="Bottom"/>
+                                    <TextBlock Text="M" FontSize="9" Foreground="{StaticResource BrushTextMuted}"
+                                               HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <StackPanel Margin="8,0" HorizontalAlignment="Center">
+                                    <Border x:Name="BarJeu" Width="28" Height="120" CornerRadius="4"
+                                            Background="{StaticResource BrushAccent}" Opacity="0.9"
+                                            VerticalAlignment="Bottom"/>
+                                    <TextBlock Text="J" FontSize="9" Foreground="{StaticResource BrushTextMuted}"
+                                               HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <StackPanel Margin="8,0" HorizontalAlignment="Center">
+                                    <Border x:Name="BarVen" Width="28" Height="90" CornerRadius="4"
+                                            Background="{StaticResource BrushPrimary}" Opacity="0.9"
+                                            VerticalAlignment="Bottom"/>
+                                    <TextBlock Text="V" FontSize="9" Foreground="{StaticResource BrushTextMuted}"
+                                               HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <StackPanel Margin="8,0" HorizontalAlignment="Center">
+                                    <Border x:Name="BarSam" Width="28" Height="30" CornerRadius="4"
+                                            Background="{StaticResource BrushTextMuted}" Opacity="0.5"
+                                            VerticalAlignment="Bottom"/>
+                                    <TextBlock Text="S" FontSize="9" Foreground="{StaticResource BrushTextMuted}"
+                                               HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <StackPanel Margin="8,0" HorizontalAlignment="Center">
+                                    <Border x:Name="BarDim" Width="28" Height="20" CornerRadius="4"
+                                            Background="{StaticResource BrushTextMuted}" Opacity="0.5"
+                                            VerticalAlignment="Bottom"/>
+                                    <TextBlock Text="D" FontSize="9" Foreground="{StaticResource BrushTextMuted}"
+                                               HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!-- L'Oracle -->
+                <Border Grid.Column="1" Style="{StaticResource GlassCardStyle}"
+                        Background="{StaticResource BrushBgCard}" Height="230">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="🔮 L'Oracle" FontSize="16" FontWeight="Bold"
+                                   Foreground="{StaticResource BrushPrimary}" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="TxtOracle"
+                                   Text="« L'avenir appartient à ceux qui maîtrisent la donnée et construisent avec audace. »"
+                                   FontSize="13" Foreground="{StaticResource BrushTextWhite}"
+                                   FontStyle="Italic" TextWrapping="Wrap" TextAlignment="Center"
+                                   Margin="20,20,20,20" LineHeight="20"/>
+                        <Button Content="⚡ Nouvelle Citation" Click="BtnOracle_Click"
+                                Style="{StaticResource NavButtonStyle}"
+                                HorizontalAlignment="Center"
+                                Foreground="{StaticResource BrushAccent}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- ══ Moniteur Live CPU / RAM ══════════════════════════════════ -->
+            <Border Style="{StaticResource GlassCardStyle}" Background="{StaticResource BrushBgCard}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Titre -->
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,30,0">
+                        <TextBlock Text="⚡ MONITEUR LIVE" FontSize="12" FontWeight="Bold"
+                                   Foreground="{StaticResource BrushTextMuted}"/>
+                        <TextBlock x:Name="TxtNativeMode" Text="● Mode natif C++"
+                                   FontSize="10" Foreground="{StaticResource BrushPrimary}"
+                                   FontFamily="Consolas" Margin="0,4,0,0"/>
+                    </StackPanel>
+
+                    <!-- CPU -->
+                    <StackPanel Grid.Column="1" Margin="0,0,20,0">
+                        <Grid Margin="0,0,0,6">
+                            <TextBlock Text="CPU" FontSize="11" FontWeight="Bold"
+                                       Foreground="{StaticResource BrushTextMuted}"/>
+                            <TextBlock x:Name="TxtCpuPct" Text="-- %" HorizontalAlignment="Right"
+                                       FontSize="11" Foreground="{StaticResource BrushAccent}"
+                                       FontFamily="Consolas" FontWeight="Bold"/>
+                        </Grid>
+                        <Border Background="#0affffff" CornerRadius="4" Height="10">
+                            <Border x:Name="CpuBar" Background="{StaticResource BrushAccent}"
+                                    CornerRadius="4" HorizontalAlignment="Left" Width="0"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- RAM -->
+                    <StackPanel Grid.Column="2" Margin="0,0,30,0">
+                        <Grid Margin="0,0,0,6">
+                            <TextBlock Text="RAM" FontSize="11" FontWeight="Bold"
+                                       Foreground="{StaticResource BrushTextMuted}"/>
+                            <TextBlock x:Name="TxtRamInfo" Text="-- Mo / --" HorizontalAlignment="Right"
+                                       FontSize="11" Foreground="{StaticResource BrushPrimary}"
+                                       FontFamily="Consolas" FontWeight="Bold"/>
+                        </Grid>
+                        <Border Background="#0affffff" CornerRadius="4" Height="10">
+                            <Border x:Name="RamBar" Background="{StaticResource BrushPrimary}"
+                                    CornerRadius="4" HorizontalAlignment="Left" Width="0"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Uptime -->
+                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                        <TextBlock Text="UPTIME" FontSize="10" FontWeight="Bold"
+                                   Foreground="{StaticResource BrushTextMuted}" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="TxtDashUptime" Text="--h --m"
+                                   FontSize="14" FontWeight="Bold" FontFamily="Consolas"
+                                   Foreground="#f59e0b" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>
