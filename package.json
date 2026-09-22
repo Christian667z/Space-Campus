@@ -8,6 +8,10 @@
   "scripts": {
     "dev": "npm run dev --workspace=frontend",
     "build": "npm run build --workspace=frontend",
-    "lint": "npm run lint --workspace=frontend"
+    "lint": "npm run lint --workspace=frontend",
+    "tauri": "tauri",
+    "rust:server": "cargo run --bin asta-server",
+    "rust:cli": "cargo run --bin asta-cli",
+    "rust:build": "cargo build --release"
   }
 }

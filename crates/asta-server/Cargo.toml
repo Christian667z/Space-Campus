@@ -1,0 +1,16 @@
+[package]
+name = "asta-server"
+version = "2.0.0"
+authors = ["Christian Alvaro <christian7alvaro@gmail.com>"]
+edition = "2021"
+description = "Serveur HTTP REST asynchrone Rust Axum (remplaçant server.py et api_bridge.py)"
+
+[dependencies]
+asta-core = { path = "../asta-core" }
+axum = { version = "0.7", features = ["json"] }
+tokio = { version = "1.0", features = ["full"] }
+tower-http = { version = "0.5", features = ["cors"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+tracing-subscriber = "0.3"

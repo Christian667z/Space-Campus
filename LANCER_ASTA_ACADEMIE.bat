@@ -1,77 +1,78 @@
 @echo off
-TITLE Asta Academie — Launcher
-COLOR 0A
+TITLE Asta Academie — Lanceur Rust Desktop
+COLOR 0B
 cd /d "%~dp0"
 
 echo.
-echo  ==============================================
-echo    ASTA ACADEMIE v2.0
-echo  ==============================================
+echo  ==============================================================
+echo    ASTA ACADEMIE v2.0 (Architecture Rust .rs & Tauri Natif)
+echo    UNASMOH - Promo 2024-2028 - Christian Alvaro
+echo  ==============================================================
 echo.
 
-:: ══════════════════════════════════════════════
-:: Backend Python (optionnel, améliore les onglets)
-:: ══════════════════════════════════════════════
-if exist ".venv\Scripts\python.exe" (
-    start "AstaBridge" /min ".venv\Scripts\python.exe" "api_bridge.py"
-    echo  [+] Backend Python démarré ^(Space AI / Oracle / Quiz^)
-    timeout /t 2 /nobreak >nul
-)
-
-:: ══════════════════════════════════════════════
-:: PRIORITE 1 : C# WPF — dossier dist\AstaWPF\
-:: ══════════════════════════════════════════════
-if exist "dist\AstaWPF\AstaAcademieApp.exe" (
-    echo  [C#] Lancement Asta Academie WPF...
-    start "" "dist\AstaWPF\AstaAcademieApp.exe"
+:: ══════════════════════════════════════════════════════════════════
+:: PRIORITÉ 1 : Exécutable Rust / Tauri natif compilé (.rs)
+:: ══════════════════════════════════════════════════════════════════
+set RUST_RELEASE_EXE=src-tauri\target\release\asta-campus-desktop.exe
+if exist "%RUST_RELEASE_EXE%" (
+    echo  [+] Lancement d'Asta Academie (Binaire Rust Release)...
+    start "" "%RUST_RELEASE_EXE%"
     exit /b 0
 )
 
-:: ══════════════════════════════════════════════
-:: PRIORITE 2 : Debug build (dev)
-:: ══════════════════════════════════════════════
-set CSHARP_EXE=csharp\AstaAcademieApp\bin\Debug\net9.0-windows\AstaAcademieApp.exe
-if exist "%CSHARP_EXE%" (
-    echo  [C#] Lancement depuis Debug build...
-    start "" "%CSHARP_EXE%"
+set RUST_DEBUG_EXE=src-tauri\target\debug\asta-campus-desktop.exe
+if exist "%RUST_DEBUG_EXE%" (
+    echo  [+] Lancement d'Asta Academie (Binaire Rust Debug)...
+    start "" "%RUST_DEBUG_EXE%"
     exit /b 0
 )
 
-:: ══════════════════════════════════════════════
-:: PRIORITE 3 : Build auto
-:: ══════════════════════════════════════════════
-where dotnet >nul 2>&1
+:: ══════════════════════════════════════════════════════════════════
+:: PRIORITÉ 2 : Environnement de développement Cargo / Tauri
+:: ══════════════════════════════════════════════════════════════════
+where cargo >nul 2>&1
 if %errorlevel%==0 (
-    echo  [C#] Build en cours...
-    dotnet build "csharp\AstaAcademieApp\AstaAcademieApp.csproj" -c Debug --nologo -v quiet
-    if exist "%CSHARP_EXE%" (
-        start "" "%CSHARP_EXE%"
+    echo  [+] Cargo Rust detecte.
+    echo  [1] Lancer Tauri Desktop (Rust + UI Moderne)
+    echo  [2] Lancer Serveur Rust REST (asta-server)
+    echo  [3] Lancer CLI Rust Administration (asta-cli)
+    echo.
+    set /p choix="Votre choix [1-3] (Defaut: 1): "
+    if "%choix%"=="2" (
+        cargo run --bin asta-server
+        exit /b 0
+    )
+    if "%choix%"=="3" (
+        cargo run --bin asta-cli -- --help
+        pause
+        exit /b 0
+    )
+    
+    echo  [+] Demarrage du moteur Tauri v2 Rust...
+    where npx >nul 2>&1
+    if %errorlevel%==0 (
+        call npx tauri dev
+        exit /b 0
+    ) else (
+        cargo run --manifest-path src-tauri\Cargo.toml
         exit /b 0
     )
 )
 
-:: ══════════════════════════════════════════════
-:: FALLBACK : Legacy Python
-:: ══════════════════════════════════════════════
-if exist "dist\AstaAcademieLauncher.exe" (
-    echo  [PY] Fallback Python...
-    start "" "dist\AstaAcademieLauncher.exe"
-    exit /b 0
-)
-
-if exist "dist\AstaAcademie.exe" (
-    start "" "dist\AstaAcademie.exe"
-    exit /b 0
-)
-
-if exist ".venv\Scripts\pythonw.exe" (
-    start "" ".venv\Scripts\pythonw.exe" "main_qt.py"
+:: ══════════════════════════════════════════════════════════════════
+:: PRIORITÉ 3 : Interface C# WPF (Secours)
+:: ══════════════════════════════════════════════════════════════════
+if exist "dist\AstaWPF\AstaAcademieApp.exe" (
+    echo  [C#] Lancement de secours Asta WPF...
+    start "" "dist\AstaWPF\AstaAcademieApp.exe"
     exit /b 0
 )
 
 echo.
-echo  [!] Aucune application trouvee.
-echo  Lancez build_csharp.bat pour compiler l'app.
+echo  [!] Pour compiler et lancer l'application en Rust :
+echo      1. Installez Rust : https://rustup.rs
+echo      2. Executez : cargo run --bin asta-server
+echo      3. Ou : npx tauri dev
 echo.
 pause
 exit /b 1
