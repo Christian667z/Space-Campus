@@ -167,4 +167,59 @@ impl DatabaseManager {
         }
         Ok(logs)
     }
+
+    /// Exécute une requête SQL avec paramètres (helper pour les sous-modules)
+    pub fn execute(&self, sql: &str, params: impl rusqlite::Params) -> Result<usize> {
+        self.conn.execute(sql, params)
+    }
+
+    /// Recherche une licence dans la base par sa clé
+    pub fn query_license(&self, license_key: &str) -> Result<Option<crate::licenses::License>> {
+        let mut stmt = self.conn.prepare(
+            "SELECT license_key, machine_fingerprint, is_active, activation_date
+             FROM offline_licenses WHERE license_key = ?1",
+        )?;
+
+        let result = stmt.query_row(params![license_key], |row| {
+            let is_active_int: i32 = row.get(2)?;
+            Ok(crate::licenses::License {
+                license_key: row.get(0)?,
+                owner_name: String::new(),
+                machine_fingerprint: row.get(1)?,
+                is_active: is_active_int != 0,
+                activation_date: row.get(3)?,
+            })
+        });
+
+        match result {
+            Ok(lic) => Ok(Some(lic)),
+            Err(rusqlite::Error::QueryReturnedNoRows) => Ok(None),
+            Err(e) => Err(e),
+        }
+    }
+
+    /// Retourne toutes les licences enregistrées localement
+    pub fn get_all_licenses(&self) -> Result<Vec<crate::licenses::License>> {
+        let mut stmt = self.conn.prepare(
+            "SELECT license_key, machine_fingerprint, is_active, activation_date
+             FROM offline_licenses ORDER BY activation_date DESC",
+        )?;
+
+        let iter = stmt.query_map([], |row| {
+            let is_active_int: i32 = row.get(2)?;
+            Ok(crate::licenses::License {
+                license_key: row.get(0)?,
+                owner_name: String::new(),
+                machine_fingerprint: row.get(1)?,
+                is_active: is_active_int != 0,
+                activation_date: row.get(3)?,
+            })
+        })?;
+
+        let mut result = Vec::new();
+        for item in iter {
+            result.push(item?);
+        }
+        Ok(result)
+    }
 }
