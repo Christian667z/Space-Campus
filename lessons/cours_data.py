@@ -56,7 +56,7 @@ ERREUR CLASSIQUE À ÉVITER :
                 "titre": "Histoire de l'Informatique — Des Origines à Aujourd'hui",
                 "niveau_difficulte": 2,
                 "theorie": """
-CHRONOLOGIE ESSENTIELLE (À RETENIR POUR L'EXAMEN)
+CHRONOLOGIE ESSENTIELLE 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 GÉNÉRATION 1 (1940-1955) — Tubes à vide

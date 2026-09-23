@@ -5,8 +5,13 @@ authors = ["Christian Alvaro <christian7alvaro@gmail.com>"]
 edition = "2021"
 description = "Serveur HTTP REST asynchrone Rust Axum (remplaçant server.py et api_bridge.py)"
 
+[features]
+# Activer pour la production MSVC (SQLite compilé depuis les sources C)
+bundled-sqlite = ["asta-core/bundled-sqlite"]
+default = []
+
 [dependencies]
-asta-core = { path = "../asta-core" }
+asta-core = { path = "../asta-core", default-features = false }
 axum = { version = "0.7", features = ["json"] }
 tokio = { version = "1.0", features = ["full"] }
 tower-http = { version = "0.5", features = ["cors"] }
